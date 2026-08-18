@@ -3,6 +3,7 @@ public class Bishop extends Piece{
         super(piece, color, iD);
     }
 
+
     @Override
     public boolean validMove(int x, int y, int moveX, int moveY, Piece[][] board) {
         int dy = Math.abs(moveY - y);
@@ -17,34 +18,27 @@ public class Bishop extends Piece{
                 board[moveY][moveX].getColor() != getColor());
     }
 
-    public boolean isClearDiagonal(int x, int y, int moveX, int moveY, Piece[][] board){
-        int directionX = moveX >x ? 1 : -1;
-        int directionY = moveY > y ? 1 : -1;
-        if(directionX > 0&& directionY > 0){
-            for(int r = y + directionY; r != moveY; r++){
-                for(int c = x + directionX; c!=moveX; c++){
-                    if(!(board[r][c] instanceof NullPiece)){
-                        return false;
-                    }
-                }
-            }
-        }
-        else if(directionX < 0&& directionY < 0){
-            for(int r = y + directionY; r != moveY; r--){
-                for(int c = x + directionX; c!=moveX; c--){
-                    if(!(board[r][c] instanceof NullPiece)){
-                        return false;
-                    }
-                }
-            }
-        }
 
+    public boolean isClearDiagonal(int x, int y, int moveX, int moveY, Piece[][] board){
+        int directionX = moveX > x ? 1 : -1;
+        int directionY = moveY > y ? 1 : -1;
+        int distance = Math.abs(moveX - x);
+        for(int i = 1; i < distance; i++){
+            int r = y + i * directionY;
+            int c = x + i * directionX;
+            if(!(board[r][c] instanceof NullPiece)){
+                return false;
+            }
+        }
         return true;
     }
+
+
     @Override
     public boolean isClear(int x, int y, Piece[][] board) {
         return board[y][x].getColor() != getColor();
     }
+
 
     public boolean isClearUp(int x, int y, int moveX, int moveY, Piece[][] board){
         for (int r = y; r < moveY; r++){
@@ -56,6 +50,7 @@ public class Bishop extends Piece{
         }
         return true;
     }
+
 
     public boolean isClearDown(int x, int y, int moveX, int moveY, Piece[][] board){
         for (int r = y; r > moveY; r--){
