@@ -17,9 +17,11 @@ public class Pawn extends Piece {
         }
         else if (isClear(moveX, moveY, board) && x == moveX && y + direction == moveY) {
             return true;
-        } else if (isClear(moveX, moveY, board) && isClear(moveX, moveY-direction, board) && x == moveX && y + direction * 2 == moveY && (y == 1 || y == 6)) {
+        } 
+        else if (isClear(moveX, moveY, board) && isClear(moveX, moveY-direction, board) && x == moveX && y + direction * 2 == moveY && (y == 1 || y == 6)) {
             return true;
-        } else if (!(board[moveY][moveX] instanceof NullPiece) &&
+        } 
+        else if (!(board[moveY][moveX] instanceof NullPiece) &&
                 board[moveY][moveX].getColor() != getColor() &&
                 (x+1 == moveX || x-1 == moveX) && y+direction==moveY){
             return true;
@@ -32,7 +34,11 @@ public class Pawn extends Piece {
         return board[y][x] instanceof NullPiece;
     }
 
-
+    @Override
+    public boolean attacksSquare(int x, int y, int targetX, int targetY, Piece[][] board) {
+    int direction = getColor() == Color.BLACK ? 1 : -1;
+    return (targetX == x + 1 || targetX == x - 1) && targetY == y + direction;
+    }
 }
 
 

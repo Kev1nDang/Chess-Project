@@ -37,7 +37,12 @@ public abstract class Piece {
         return validMove(move.x, move.y, move.moveX, move.moveY, board);
     }
 
+    public boolean attacksSquare(int x, int y, int targetX, int targetY, Piece[][] board){
+        return validMove(x, y, targetX, targetY, board);
+    }
+
     public abstract boolean isClear(int x, int y, Piece[][] board);
+
 
 
 
