@@ -26,27 +26,16 @@ public class Queen extends Piece{
                 board[moveY][moveX].getColor() != getColor());
     }
     public boolean isClearDiagonal(int x, int y, int moveX, int moveY, Piece[][] board){
-        int directionX = moveX >x ? 1 : -1;
+        int directionX = moveX > x ? 1 : -1;
         int directionY = moveY > y ? 1 : -1;
-        if(directionX > 0&& directionY > 0){
-            for(int r = y + directionY; r != moveY; r++){
-                for(int c = x + directionX; c!=moveX; c++){
-                    if(!(board[r][c] instanceof NullPiece)){
-                        return false;
-                    }
-                }
+        int distance = Math.abs(moveX - x);
+        for(int i = 1; i < distance; i++){
+            int r = y + i * directionY;
+            int c = x + i * directionX;
+            if(!(board[r][c] instanceof NullPiece)){
+                return false;
             }
         }
-        else if(directionX < 0&& directionY < 0){
-            for(int r = y + directionY; r != moveY; r--){
-                for(int c = x + directionX; c!=moveX; c--){
-                    if(!(board[r][c] instanceof NullPiece)){
-                        return false;
-                    }
-                }
-            }
-        }
-
         return true;
     }
 
