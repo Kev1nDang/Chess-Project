@@ -115,4 +115,6 @@ public class Board {
         board[move.moveY][move.moveX] = board[move.y][move.x];
         board[move.y][move.x] = new NullPiece();
     }
+
+    
 }
