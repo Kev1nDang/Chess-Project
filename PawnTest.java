@@ -57,6 +57,46 @@ class PawnTest {
         assertFalse(whitePawn.validMove(0, 6, 1, 5, board));
     }
 
+    @Test
+    void whitePawnAttacksBothDiagonalForwardSquaresEvenWhenEmpty() {
+        Pawn whitePawn = new Pawn("♙", Color.WHITE, "0");
+        Board newBoard = new Board(false);
+        newBoard.board[6][3] = whitePawn;
+
+        assertTrue(whitePawn.attacksSquare(3, 6, 2, 5, newBoard.board));
+        assertTrue(whitePawn.attacksSquare(3, 6, 4, 5, newBoard.board));
+    }
+
+    @Test
+    void blackPawnAttacksBothDiagonalForwardSquaresEvenWhenEmpty() {
+        Pawn blackPawn = new Pawn("♟", Color.BLACK, "0");
+        Board newBoard = new Board(false);
+        newBoard.board[1][3] = blackPawn;
+
+        assertTrue(blackPawn.attacksSquare(3, 1, 2, 2, newBoard.board));
+        assertTrue(blackPawn.attacksSquare(3, 1, 4, 2, newBoard.board));
+    }
+
+    @Test
+    void pawnDoesNotAttackSquareDirectlyAhead() {
+        Pawn whitePawn = new Pawn("♙", Color.WHITE, "0");
+        Board newBoard = new Board(false);
+        newBoard.board[6][3] = whitePawn;
+
+        assertFalse(whitePawn.attacksSquare(3, 6, 3, 5, newBoard.board));
+    }
+
+    @Test
+    void attacksSquareDiffersFromValidMoveOnEmptyDiagonal() {
+        Pawn whitePawn = new Pawn("♙", Color.WHITE, "0");
+        Board newBoard = new Board(false);
+        newBoard.board[6][3] = whitePawn;
+
+        // validMove requires an actual enemy piece to capture; attacksSquare doesn't
+        assertFalse(whitePawn.validMove(3, 6, 4, 5, newBoard.board));
+        assertTrue(whitePawn.attacksSquare(3, 6, 4, 5, newBoard.board));
+    }
+
     private void initializeBoard(Piece[][] board) {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {

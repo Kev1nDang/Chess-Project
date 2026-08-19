@@ -78,4 +78,13 @@ public class RookTest {
         Assertions.assertFalse(r.validMove(0,0, 3,0, board.board)); // Move obstructed by own piece
     }
 
+    @Test
+    public void attacksSquareDelegatesToValidMoveForRook(){
+        Board board = new Board(false);
+        Piece r = new Rook("R", Color.WHITE, "1");
+        board.board[0][0] = r;
+        board.display();
+        Assertions.assertEquals(r.validMove(0,0,0,5,board.board), r.attacksSquare(0,0,0,5,board.board));
+    }
+
 }

@@ -46,6 +46,17 @@ public class GameState {
             }else{
                 playerColor = Color.WHITE;
             }
+            if (board.isCheckmate(playerColor, board.board)){
+                board.display();
+                Color winner = (playerColor == Color.WHITE) ? Color.BLACK : Color.WHITE;
+                System.out.println("Checkmate! " + winner + " wins.");
+                break;
+            }
+            else if (board.isStalemate(playerColor, board.board)){
+                board.display();
+                System.out.println("Stalemate! The game is a draw.");
+                break;
+            }
 
         }
     }
@@ -77,6 +88,11 @@ public class GameState {
                 continue;
             }
             if(!piece.validMove(move,board.board)){
+                System.out.println("Invalid Move");
+                continue;
+            }
+
+            if(board.wouldBeInCheck(move, playerColor, board.board)){
                 System.out.println("Invalid Move");
                 continue;
             }

@@ -128,4 +128,43 @@ public class QueenTest {
         Assertions.assertFalse(q.validMove(0,0, 2,1, board.board)); // Move obstructed by own piece
     }
 
+    @Test
+    public void clearAntiDiagonalMoveWorks(){
+        Board board = new Board(false);
+        Piece q = new Queen("Q", Color.WHITE, "1");
+        board.board[0][7] = q;
+        board.display();
+        Assertions.assertTrue(q.validMove(7,0, 0,7, board.board)); // up-right/down-left diagonal
+    }
+
+    @Test
+    public void blockedOnAntiDiagonal(){
+        Board board = new Board(false);
+        Piece q = new Queen("Q", Color.WHITE, "1");
+        Piece blocker = new Pawn("P", Color.BLACK, "1");
+        board.board[0][7] = q;
+        board.board[3][4] = blocker;
+        board.display();
+        Assertions.assertFalse(q.validMove(7,0, 0,7, board.board)); // anti-diagonal was never blocking-checked before the fix
+    }
+
+    @Test
+    public void offDiagonalPieceDoesNotBlock(){
+        Board board = new Board(false);
+        Piece q = new Queen("Q", Color.WHITE, "1");
+        Piece notInThePath = new Pawn("P", Color.BLACK, "1");
+        board.board[0][0] = q;
+        board.board[2][1] = notInThePath; // inside the old buggy rectangle, but off the true diagonal
+        board.display();
+        Assertions.assertTrue(q.validMove(0,0, 3,3, board.board));
+    }
+
+    @Test
+    public void sameSquareMoveDoesNotThrow(){
+        Board board = new Board(false);
+        Piece q = new Queen("Q", Color.WHITE, "1");
+        board.board[0][0] = q;
+        Assertions.assertDoesNotThrow(() -> q.validMove(0,0, 0,0, board.board));
+    }
+
 }
