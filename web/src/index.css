@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Georgia", "Cambria", serif;
+  --color-board-light: #eeeadd;
+  --color-board-dark: #7c9473;
+  --color-board-selected: #f6d873;
+  --color-board-check: #e0645a;
+  --color-board-last: #f0e08a;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at 50% 0%, #1f2a24 0%, #101512 60%, #0b0e0c 100%);
+  color: #f4f1ea;
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+}
+
+.piece-glyph {
+  font-family: "Segoe UI Symbol", "Noto Sans Symbols2", "DejaVu Sans", sans-serif;
+  line-height: 1;
+  user-select: none;
+}
+
+.piece-white {
+  color: #fbfbf8;
+  -webkit-text-stroke: 1.5px #2a2a28;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.35));
+}
+
+.piece-black {
+  color: #23211d;
+  -webkit-text-stroke: 1px #23211d;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.45));
+}

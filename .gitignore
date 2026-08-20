@@ -1,0 +1,16 @@
+# Maven
+target/
+dependency-reduced-pom.xml
+
+# Node / Vite
+web/node_modules/
+web/dist/
+web/.env
+web/.env.local
+
+# IDE
+.idea/
+*.iml.bak
+
+# Logs
+*.log
